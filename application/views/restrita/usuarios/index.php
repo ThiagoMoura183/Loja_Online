@@ -9,9 +9,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Basic DataTables</h4>
+                            <h4><?php echo $titulo; ?></h4>
                         </div>
                         <div class="card-body">
+
+                            <?php if ($message = $this->session->flashdata('erro')) : ?>
+                                <div class="alert alert-danger alert-dismissible show fade">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <?php echo $message; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+
                             <div class="table-responsive">
                                 <table class="table table-striped data-table">
                                     <thead>
@@ -23,7 +36,7 @@
                                             <th>E-mail</th>
                                             <th>Usuário</th>
                                             <th>Status</th>
-                                            <th>Ação</th>
+                                            <th class="nosort">Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,7 +60,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="#" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a> 
+                                                    <a href="<?php echo base_url('restrita/usuarios/core/' . $usuario->id) ?>" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
                                                     <a href="#" class="btn btn-icon btn-danger"><i class="fas fa-times"></i></a>
                                                 </td>
                                             <?php endforeach; ?>

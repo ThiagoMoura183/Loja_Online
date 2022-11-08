@@ -1,12 +1,12 @@
 <?php
 
-defined('BASEPATH') OR exit('Ação não permitida!');
+defined('BASEPATH') or exit('Ação não permitida!');
 
 class Usuarios extends CI_Controller {
     public function __construct() {
         parent::__construct();
-        
-       // Existe sessão válida?
+
+        // Existe sessão válida?
     }
 
     public function index() {
@@ -33,5 +33,33 @@ class Usuarios extends CI_Controller {
         $this->load->view('restrita/layout/header', $data);
         $this->load->view('restrita/usuarios/index');
         $this->load->view('restrita/layout/footer');
+    }
+
+    public function core($usuarioId = NULL) {
+
+        if (!$usuarioId) {
+            // Cadastrar Usuário
+        } else {
+            // Editar usuário
+            if (!$usuario = $this->ion_auth->user($usuarioId)->row()) {
+                // exit('Não existe'); (DEBUG)
+                $this->session->set_flashdata('erro', 'Usuário não foi encontrado!');
+                redirect('restrita/usuarios');
+                // Só consegue capturar a mensagem de flash data quando dá o redirect!
+            } else {
+                // exit('Usuário encontrado'); (DEBUG)
+
+                $data = [
+                    'titulo' => 'Editar Usuário',
+                    'usuario' => $usuario,
+                    'perfil' => $this->ion_auth->get_users_groups($usuarioId)->row(),
+                    'grupos' => $this->ion_auth->groups($usuarioId)->result(),
+                ];
+
+                $this->load->view('restrita/layout/header', $data);
+                $this->load->view('restrita/usuarios/core');
+                $this->load->view('restrita/layout/footer');
+            }
+        }
     }
 }
