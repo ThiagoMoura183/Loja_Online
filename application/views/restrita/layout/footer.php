@@ -15,6 +15,12 @@
     <script src="<?PHP echo base_url('public/assets/js/scripts.js'); ?>"></script>
     <!-- Custom JS File -->
     <script src="<?PHP echo base_url('public/assets/js/custom.js'); ?>"></script>
+
+    <?php if (isset($scripts)) : ?>
+        <?php foreach ($scripts as $script) : ?>
+            <script src="<?PHP echo base_url("public/assets/{$script}"); ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 
 </html>
