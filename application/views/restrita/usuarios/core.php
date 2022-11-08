@@ -12,7 +12,19 @@
                             <h4><?php echo $titulo; ?></h4>
                         </div>
 
-                        <form name="form_core">
+                        <?php
+                        $atributos = [
+                            'name' => 'form_core',
+                        ];
+
+                        (isset($usuario)) ? $usuario_id = $usuario->id : $usuario_id = '';
+                        ?>
+
+                        <!-- Multipart serve para enviar imagens, como não será enviado, podemos colocar apenas open -->
+                        <?php echo form_open('restrita/usuarios/core/' . $usuario_id, $atributos); ?>
+
+                        <!-- Não precisa disso pois é a abertura PADRÃO de formulários, mas utilizará o form_open (acima) -->
+                        <!-- <form name="form_core"> --> 
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
@@ -75,12 +87,18 @@
                                         </select>
                                     </div>
 
+                                    <?php if (isset($usuario)) : ?>
+                                        <input type="hidden" name="usuario_id" value="<?php echo $usuario->id; ?>">
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-primary">Salvar</button>
+                                <button class="btn btn-primary mr-2">Salvar</button>
+                                <a class="btn btn-dark" href="<?php echo base_url('restrita/usuarios'); ?>">Voltar</a>
                             </div>
-                        </form>
+                        <!-- </form> -->
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>

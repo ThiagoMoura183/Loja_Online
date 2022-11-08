@@ -2,14 +2,17 @@
 
 defined('BASEPATH') or exit('Ação não permitida!');
 
-class Usuarios extends CI_Controller {
-    public function __construct() {
+class Usuarios extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
 
         // Existe sessão válida?
     }
 
-    public function index() {
+    public function index()
+    {
         $data = [
             'usuarios' => $this->ion_auth->users()->result(),
             'titulo' => 'Usuários cadastrados',
@@ -35,7 +38,8 @@ class Usuarios extends CI_Controller {
         $this->load->view('restrita/layout/footer');
     }
 
-    public function core($usuarioId = NULL) {
+    public function core($usuarioId = NULL)
+    {
 
         if (!$usuarioId) {
             // Cadastrar Usuário
@@ -43,22 +47,31 @@ class Usuarios extends CI_Controller {
             // Editar usuário
             if (!$usuario = $this->ion_auth->user($usuarioId)->row()) {
                 // exit('Não existe'); (DEBUG)
+                // Só consegue capturar a mensagem de flash data quando dá o redirect!
                 $this->session->set_flashdata('erro', 'Usuário não foi encontrado!');
                 redirect('restrita/usuarios');
-                // Só consegue capturar a mensagem de flash data quando dá o redirect!
             } else {
                 // exit('Usuário encontrado'); (DEBUG)
+                // Campo do form, O que significa, REGRAS
+                $this->form_validation->set_rules('first_name', 'Nome', 'trim|required');
 
-                $data = [
-                    'titulo' => 'Editar Usuário',
-                    'usuario' => $usuario,
-                    'perfil' => $this->ion_auth->get_users_groups($usuarioId)->row(),
-                    'grupos' => $this->ion_auth->groups($usuarioId)->result(),
-                ];
+                if ($this->form_validation->run()) {
+                    echo '<pre>';
+                    print_r($this->input->post());
+                    exit();
+                } else {
+                    // Erro de validação
+                    $data = [
+                        'titulo' => 'Editar Usuário',
+                        'usuario' => $usuario,
+                        'perfil' => $this->ion_auth->get_users_groups($usuarioId)->row(),
+                        'grupos' => $this->ion_auth->groups($usuarioId)->result(),
+                    ];
 
-                $this->load->view('restrita/layout/header', $data);
-                $this->load->view('restrita/usuarios/core');
-                $this->load->view('restrita/layout/footer');
+                    $this->load->view('restrita/layout/header', $data);
+                    $this->load->view('restrita/usuarios/core');
+                    $this->load->view('restrita/layout/footer');
+                }
             }
         }
     }
