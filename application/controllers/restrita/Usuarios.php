@@ -36,6 +36,52 @@ class Usuarios extends CI_Controller {
         $this->load->view('restrita/layout/footer');
     }
 
+    // Funções utilizada para callback de form validation
+    public function valida_email($email) {
+        $usuarioId = $this->input->post('usuario_id');
+
+        if (!$usuarioId) {
+            //Cadastrando...
+            if ($this->core_model->getById('users', ['email' => $email])) {
+                $this->form_validation->set_message('valida_email', 'Esse e-mail já existe!');
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            //Editando...
+            if ($this->core_model->getById('users', ['email' => $email, 'id <>' => $usuarioId])) {
+                $this->form_validation->set_message('valida_email', 'Esse e-mail já existe!');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function valida_usuario($username) {
+        $usuarioId = $this->input->post('usuario_id');
+
+        if (!$usuarioId) {
+            //Cadastrando...
+            if ($this->core_model->getById('users', ['username' => $username])) {
+                $this->form_validation->set_message('valida_usuário', 'Esse usuário já existe!');
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            //Editando...
+            if ($this->core_model->getById('users', ['username' => $username, 'id <>' => $usuarioId])) {
+                $this->form_validation->set_message('valida_usuário', 'Esse usuário já existe!');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+
     public function core($usuarioId = NULL) {
 
         if (!$usuarioId) {
@@ -55,6 +101,10 @@ class Usuarios extends CI_Controller {
                 $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[4]|max_length[45]');
                 $this->form_validation->set_rules('last_name', 'Sobrenome', 'trim|required|min_length[4]|max_length[45]');
                 $this->form_validation->set_rules('email', 'E-mail', 'trim|required|min_length[4]|max_length[100]|valid_email|callback_valida_email');
+                $this->form_validation->set_rules('username', 'Usuário', 'trim|required|min_length[4]|max_length[45]|callback_valida_usuario');
+                // Obs: O callback faz a chamada de uma função dentro da própria controller
+                $this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[4]|max_length[200]');
+                $this->form_validation->set_rules('confirma', 'Confirmação de senha', 'required|matches[password]');
 
                 if ($this->form_validation->run()) {
                     echo '<pre>';
