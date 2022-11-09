@@ -2,8 +2,7 @@
 
 defined('BASEPATH') or exit('Ação não permitida!');
 
-class Usuarios extends CI_Controller
-{
+class Usuarios extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
@@ -11,8 +10,7 @@ class Usuarios extends CI_Controller
         // Existe sessão válida?
     }
 
-    public function index()
-    {
+    public function index() {
         $data = [
             'usuarios' => $this->ion_auth->users()->result(),
             'titulo' => 'Usuários cadastrados',
@@ -38,8 +36,7 @@ class Usuarios extends CI_Controller
         $this->load->view('restrita/layout/footer');
     }
 
-    public function core($usuarioId = NULL)
-    {
+    public function core($usuarioId = NULL) {
 
         if (!$usuarioId) {
             // Cadastrar Usuário
@@ -52,7 +49,7 @@ class Usuarios extends CI_Controller
                 redirect('restrita/usuarios');
             } else {
                 // exit('Usuário encontrado'); (DEBUG)
-                // Campo do form, O que significa, REGRAS
+                // Abaixo, os parâmetros são na seguinte ordem: Campo do form, O que significa (aparecerá no erro), REGRAS APLICADAS
                 $this->form_validation->set_rules('first_name', 'Nome', 'trim|required');
 
                 if ($this->form_validation->run()) {
@@ -60,7 +57,6 @@ class Usuarios extends CI_Controller
                     print_r($this->input->post());
                     exit();
                 } else {
-                    // Erro de validação
                     $data = [
                         'titulo' => 'Editar Usuário',
                         'usuario' => $usuario,
