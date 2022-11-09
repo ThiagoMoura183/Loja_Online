@@ -49,8 +49,12 @@ class Usuarios extends CI_Controller {
                 redirect('restrita/usuarios');
             } else {
                 // exit('Usuário encontrado'); (DEBUG)
+
                 // Abaixo, os parâmetros são na seguinte ordem: Campo do form, O que significa (aparecerá no erro), REGRAS APLICADAS
-                $this->form_validation->set_rules('first_name', 'Nome', 'trim|required');
+                // O arquivo que fica todas as validações é o "form_validation_lang.php (dentro de language)"
+                $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[4]|max_length[45]');
+                $this->form_validation->set_rules('last_name', 'Sobrenome', 'trim|required|min_length[4]|max_length[45]');
+                $this->form_validation->set_rules('email', 'E-mail', 'trim|required|min_length[4]|max_length[100]|valid_email|callback_valida_email');
 
                 if ($this->form_validation->run()) {
                     echo '<pre>';
