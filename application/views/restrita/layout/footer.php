@@ -1,3 +1,5 @@
+        <!-- Função para exibir o footer nas views exceto Login -->
+        <?php if ($this->router->fetch_class() != 'login') :?> 
             <footer class="main-footer">
                 <div class="footer-left">
                 </div>
@@ -5,6 +7,8 @@
                     Desenvolvido por Thiago Moura - <script>document.write(new Date().getFullYear())</script>
                 </div>
             </footer>
+        <?php endif; ?>
+            
         </div>
     </div>
     <!-- General JS Scripts -->
