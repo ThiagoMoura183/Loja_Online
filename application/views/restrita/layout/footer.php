@@ -21,6 +21,18 @@
             <script src="<?PHP echo base_url("public/assets/{$script}"); ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
+
+    <!-- JQuery para perguntar se deseja de fato executar ação em algum click de button -->
+    <script>
+        $('.delete').on("click", function(e) {
+            event.preventDefault;
+            var choice = confirm($(this).attr('data-confirm'));
+
+            if (choice) {
+                window.location.href = $(this).attr('href');
+            }
+        });
+    </script>
 </body>
 
 </html>
