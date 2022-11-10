@@ -8,12 +8,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4><?php echo $titulo; ?></h4>
+                        <div class="card-header d-block">
+                            <h3><?php echo $titulo; ?></h3>
+                            <a class="btn btn-primary float-right" href="<?php echo base_url('restrita/usuarios/core') ?>">Novo +</a>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body mt-0">
 
-                        <?php if ($message = $this->session->flashdata('sucesso')) : ?>
+                            <?php if ($message = $this->session->flashdata('sucesso')) : ?>
                                 <div class="alert alert-success alert-has-icon alert-dismissible show fade">
                                     <div class="alert-icon"><i class="fa fa-check-circle fa-lg"></i></div>
                                     <div class="alert-body">
@@ -56,8 +57,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <?php foreach ($usuarios as $usuario) : ?>
+                                        <?php foreach ($usuarios as $usuario) : ?>
+                                            <tr>
 
                                                 <td>
                                                     <?php echo $usuario->id; ?>
@@ -72,7 +73,7 @@
                                                     <?php echo $usuario->username; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo ($this->ion_auth->is_admin($usuario->id)) ? 'Administrador' : 'Clientes' ; ?>
+                                                    <?php echo ($this->ion_auth->is_admin($usuario->id)) ? 'Administrador' : 'Clientes'; ?>
                                                 </td>
                                                 <td>
                                                     <?php echo (($usuario->active) == 1) ? '<span class="badge badge-success">Ativo</span>' : '<span class="badge badge-danger">Inativo</span>'; ?>
@@ -82,8 +83,8 @@
                                                     <a href="<?php echo base_url('restrita/usuarios/core/' . $usuario->id) ?>" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
                                                     <a href="#" class="btn btn-icon btn-danger"><i class="fas fa-times"></i></a>
                                                 </td>
-                                            <?php endforeach; ?>
-                                        </tr>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

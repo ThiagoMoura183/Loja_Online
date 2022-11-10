@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Confirmar a senha</label>
-                                        <input type="text" class="form-control" placeholder="Confirme a senha" name="confirma">
+                                        <input type="password" class="form-control" placeholder="Confirme a senha" name="confirma">
                                         <?php echo form_error('confirma', '<div class="text-danger">', '</div>') ;?>
                                     </div>
                                 </div>
