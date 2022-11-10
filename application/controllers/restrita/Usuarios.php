@@ -103,13 +103,44 @@ class Usuarios extends CI_Controller {
                 $this->form_validation->set_rules('email', 'E-mail', 'trim|required|min_length[4]|max_length[100]|valid_email|callback_valida_email');
                 $this->form_validation->set_rules('username', 'Usuário', 'trim|required|min_length[4]|max_length[45]|callback_valida_usuario');
                 // Obs: O callback faz a chamada de uma função dentro da própria controller
-                $this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[4]|max_length[200]');
-                $this->form_validation->set_rules('confirma', 'Confirmação de senha', 'required|matches[password]');
+                $this->form_validation->set_rules('password', 'Senha', 'trim|min_length[4]|max_length[200]');
+                $this->form_validation->set_rules('confirma', 'Confirmação de senha', 'trim|matches[password]');
 
                 if ($this->form_validation->run()) {
-                    echo '<pre>';
-                    print_r($this->input->post());
-                    exit();
+                    // DEBUG \/
+                    // echo '<pre>';
+                    // print_r($this->input->post());
+                    // exit();
+
+                    $data = elements(
+                        [
+                            'first_name',
+                            'last_name',
+                            'email',
+                            'username',
+                            'password',
+                            'active',
+                        ], $this->input->post()
+                    );
+
+                    $password = $this->input->post('password');
+                    if (!$password) {
+                        // Remover a senha das referências no input do post. Isso é para o cenário que o usuário não quiser editar a senha
+                        unset($data['password']);
+                    }
+
+                    // Sanitizando o $data!
+                    $data = html_escape($data);
+
+                    if ($this->ion_auth->update($usuarioId, $data)) {
+                        $this->session->set_flashdata('sucesso', 'Dados salvos com sucesso!');
+                    } else {
+                        $this->session->set_flashdata('erro', $this->ion_auth->errors());
+                    };
+                    redirect('restrita/usuarios');
+                    // Lembrar de sempre dar o redirect quando usar flashdata!
+
+
                 } else {
                     $data = [
                         'titulo' => 'Editar Usuário',
