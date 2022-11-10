@@ -133,6 +133,13 @@ class Usuarios extends CI_Controller {
                     $data = html_escape($data);
 
                     if ($this->ion_auth->update($usuarioId, $data)) {
+
+                        // Caso seja passado um perfil no post, remove de todos e insere novamente.
+                        if($perfil = $this->input->post('perfil')) {
+                            $this->ion_auth->remove_from_group(NULL, $usuarioId);
+                            $this->ion_auth->add_to_group($perfil, $usuarioId);
+                        }
+
                         $this->session->set_flashdata('sucesso', 'Dados salvos com sucesso!');
                     } else {
                         $this->session->set_flashdata('erro', $this->ion_auth->errors());
