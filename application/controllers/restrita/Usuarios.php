@@ -89,7 +89,7 @@ class Usuarios extends CI_Controller {
             // print_r($this->ion_auth->user($usuarioId)->row());
             // exit();
             
-        if (!$usuarioId /*|| !$this->ion_auth->user($usuarioId)->row()*/) {
+        if (!$usuarioId || !$this->ion_auth->user($usuarioId)->row()) {
             $this->session->set_flashdata('erro', 'O usuário não foi encontrado');
             redirect('restrita/usuarios');
         } else {
