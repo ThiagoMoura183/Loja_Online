@@ -13,7 +13,7 @@ class Usuarios extends CI_Controller {
     public function index() {
         $data = [
             'usuarios' => $this->ion_auth->users()->result(),
-            'titulo' => 'Usuários cadastrados',
+            'titulo' => 'Usuários Cadastrados',
             'styles' => [
                 'bundles/datatables/datatables.min.css',
                 'bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css'
