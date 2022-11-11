@@ -14,12 +14,14 @@
             <li class="dropdown <?php echo ($this->router->fetch_class() == 'usuarios' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
                 <a href="<?php echo base_url('restrita/usuarios'); ?>" class="nav-link"><i data-feather="users"></i><span>Usuários</span></a>
             </li>
+            <li class="dropdown <?php echo ($this->router->fetch_class() == 'usuarios' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
+                <a href="<?php echo base_url('restrita/marcas'); ?>" class="nav-link"><i data-feather="layers"></i><span>Marcas</span></a>
+            </li>
 
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Configurações</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?php echo base_url('restrita/sistema');?>">Empresa</a></li>
-                    <li><a class="nav-link" href="widget-data.html">Data Widgets</a></li>
                 </ul>
             </li>
 
