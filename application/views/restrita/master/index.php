@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-header d-block">
                             <h3><?php echo $titulo; ?></h3>
-                            <a class="btn btn-primary float-right" href="<?php echo base_url('restrita/marcas/core') ?>">Novo +</a>
+                            <a class="btn btn-primary float-right" href="<?php echo base_url('restrita/master/core') ?>">Novo +</a>
                         </div>
                         <div class="card-body mt-0">
 
@@ -56,28 +56,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($marcas as $marca) : ?>
+                                        <?php foreach ($master as $pai) : ?>
                                             <tr>
 
                                                 <td>
-                                                    <?php echo $marca->marca_id; ?>
+                                                    <?php echo $pai->categoria_pai_id; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $marca->marca_nome ?>
+                                                    <?php echo $pai->categoria_pai_nome ?>
                                                 </td>
                                                 <td>
-                                                    <i data-feather="link-2" class="mr-2 text-info"></i><?php echo $marca->marca_meta_link; ?>
+                                                    <i data-feather="link-2" class="mr-2 text-info"></i><?php echo $pai->categoria_pai_meta_link; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo formata_data_banco_com_hora($marca->marca_data_criacao); ?>
+                                                    <?php echo formata_data_banco_com_hora($pai->categoria_pai_data_criacao); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo ($marca->marca_ativa == 1) ? '<span class="badge badge-success">Ativa</span>' : '<span class="badge badge-danger">Inativa</span>'; ?>
+                                                    <?php echo ($pai->categoria_pai_ativa == 1) ? '<span class="badge badge-success">Ativa</span>' : '<span class="badge badge-danger">Inativa</span>'; ?>
                                                 </td>
 
                                                 <td>
-                                                    <a href="<?php echo base_url('restrita/marcas/core/' . $marca->marca_id); ?>" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
-                                                    <a href="<?php echo base_url('restrita/marcas/delete/' . $marca->marca_id); ?>" class="btn btn-icon btn-danger delete" data-confirm="Tem certeza da exclusão da marca?"><i class="fas fa-times"></i></a>
+                                                    <a href="<?php echo base_url('restrita/master/core/' . $pai->categoria_pai_id); ?>" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
+                                                    <a href="<?php echo base_url('restrita/master/delete/' . $pai->categoria_pai_id); ?>" class="btn btn-icon btn-danger delete" data-confirm="Tem certeza da exclusão da categoria pai?"><i class="fas fa-times"></i></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

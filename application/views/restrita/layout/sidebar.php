@@ -24,6 +24,12 @@
                     <li><a class="nav-link" href="<?php echo base_url('restrita/sistema');?>">Empresa</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="package"></i><span>Categorias</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="<?php echo base_url('restrita/master');?>">Categorias Pai</a></li>
+                </ul>
+            </li>
 
         </ul>
     </aside>
