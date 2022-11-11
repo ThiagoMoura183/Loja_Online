@@ -82,7 +82,7 @@ class Marcas extends CI_Controller {
             }
 
             $data = [
-                'titulo' => 'Editar Marca',
+                'titulo' => 'Cadastrar Marca',
             ];
 
             $this->load->view('restrita/layout/header', $data);

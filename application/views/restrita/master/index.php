@@ -48,7 +48,7 @@
                                             <th class="text-center">
                                                 #
                                             </th>
-                                            <th>Nome da Marca</th>
+                                            <th>Nome da Categoria</th>
                                             <th>Meta Link</th>
                                             <th>Data de Cadastro</th>
                                             <th>Status</th>

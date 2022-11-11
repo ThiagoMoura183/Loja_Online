@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4><?php echo $titulo; ?></h4>
+                            <h3><?php echo $titulo; ?></h3>
                         </div>
 
                         <?php
