@@ -50,6 +50,7 @@
                                             </th>
                                             <th>Nome da Marca</th>
                                             <th>Meta Link</th>
+                                            <th>Data de Cadastro</th>
                                             <th>Status</th>
                                             <th class="nosort">Ação</th>
                                         </tr>
@@ -66,6 +67,9 @@
                                                 </td>
                                                 <td>
                                                     <i data-feather="link-2" class="mr-2 text-info"></i><?php echo $marca->marca_meta_link; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo formata_data_banco_com_hora($marca->marca_data_criacao); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo ($marca->marca_ativa == 1) ? '<span class="badge badge-success">Ativa</span>' : '<span class="badge badge-danger">Inativa</span>'; ?>

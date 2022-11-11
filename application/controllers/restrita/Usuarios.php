@@ -109,6 +109,7 @@ class Usuarios extends CI_Controller {
     }
 
 
+    // A função core no projeto é utilizada para ADICIONAR e ATUALIZAR registros
     public function core(int $usuarioId = NULL) {
 
         if (!$usuarioId) {
