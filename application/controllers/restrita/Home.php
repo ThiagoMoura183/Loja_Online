@@ -5,7 +5,12 @@ defined('BASEPATH') or exit('Ação não permitida!');
 class Home extends CI_Controller {
     public function __construct() {
         parent::__construct();
-        // Existe sessão válida?
+        
+        // Existe uma sessão válida?
+        if (!$this->ion_auth->logged_in()) {
+          redirect('restrita/login');
+        }
+      
     }
 
     public function index() {
