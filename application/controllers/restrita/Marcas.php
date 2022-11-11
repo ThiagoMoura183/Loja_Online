@@ -59,28 +59,50 @@ class Marcas extends CI_Controller {
 
 
       // A função core no projeto é utilizada para ADICIONAR e ATUALIZAR registros
-      public function core($marcaId = NULL) {
-
+    public function core($marcaId = NULL) {
         if (!$marcaId) {
             //Cadastrando uma Marca Nova
+
+            $this->form_validation->set_rules('marca_nome',' Nome da Marca', 'trim|required|min_length[2]|callback_validaNomeUnico');
+
+            if ($this->form_validation->run()) {
+                $data = elements(
+                    [
+                    'marca_nome',
+                    'marca_ativa',
+                    ], $this->input->post()
+                );
+
+                // Criando meta link (removendo acentuações, etc.)
+                $data['marca_meta_link'] = url_amigavel($data['marca_nome']);
+
+                $data = html_escape($data);
+                $this->core_model->insert('marcas', $data);
+                redirect('restrita/marcas');
+            }
+
+            $data = [
+                'titulo' => 'Editar Marca',
+            ];
+
+            $this->load->view('restrita/layout/header', $data);
+            $this->load->view('restrita/marcas/core');
+            $this->load->view('restrita/layout/footer');
+
         } else {
-            if (! $marca = $this->core_model->getById('marcas',['marca_id' => $marcaId])) {
+            if (!$marca = $this->core_model->getById('marcas',['marca_id' => $marcaId])) {
                 $this->session->set_flashdata('erro', 'A marca não foi encontrada!');
                 redirect('restrita/marcas');
             } else {
                 //Editando uma Marca
 
                 $this->form_validation->set_rules('marca_nome',' Nome da Marca', 'trim|required|min_length[2]|callback_validaNomeUnico');
-                // $this->form_validation->set_rules('marca_meta_link',' Meta Link', 'trim|required|min_length[2]');
-                // $this->form_validation->set_rules('marca_nome',' Nome da Marca', 'trim|required|min_length[2]');
-                // $this->form_validation->set_rules('marca_nome',' Nome da Marca', 'trim|required|min_length[2]');
 
                 if ($this->form_validation->run()) {
                     $data = elements(
                         [
                         'marca_nome',
                         'marca_ativa',
-                        'marca_meta_link',
                         ], $this->input->post()
                     );
 
@@ -102,5 +124,26 @@ class Marcas extends CI_Controller {
                 $this->load->view('restrita/layout/footer');
             }
         }
+    }
+
+    // TODO
+    public function delete(int $marcaId = NULL) {
+
+        echo '<pre>';
+        print_r($this->core_model->getById('marcas',['marca_id' => $marcaId]));
+        print_r($marcaId);
+        echo '<pre>';
+        /*  if(!$marcaId || !$this->core_model->getById('marcas',['marca_id' => $marcaId])) {
+            $this->session->set_flashdata('erro', 'A marca não foi encontrada!');
+            redirect('restrita/marcas');
+        } 
+        
+        if($this->core_model->getById('marcas',['marca_id' => $marcaId, 'marca_ativa' => 1])) {
+            $this->session->set_flashdata('erro', 'Não é possível excluir uma marca ativa!');
+            redirect('restrita/marcas');
+        }
+
+        $this->core_model->delete('marcas',['marca_id' => $marcaId]);
+        */
     }
 }

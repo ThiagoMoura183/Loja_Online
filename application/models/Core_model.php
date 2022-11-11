@@ -17,7 +17,7 @@ class Core_model extends CI_Model
         }
     }
 
-    public function getbyId($tabela = NULL, $condicoes = NULL)
+    public function getById($tabela = NULL, $condicoes = NULL)
     {
         if ($tabela && $this->db->table_exists($tabela) && is_array($condicoes)) {
             $this->db->where($condicoes);
@@ -36,6 +36,8 @@ class Core_model extends CI_Model
                 // O insert_id retorna o ID gerado automaticamente na última consulta
                 $this->session->set_userdata('last_id', $this->db->insert_id());
             }
+
+            $this->db->insert($tabela, $data);
 
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('sucesso', 'Dados salvos com sucesso!');
@@ -70,8 +72,6 @@ class Core_model extends CI_Model
             }
         } else {
             return false;
-        }
+        }     
     }
-
-
 }
