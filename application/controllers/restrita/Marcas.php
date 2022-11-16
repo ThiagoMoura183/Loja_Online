@@ -129,11 +129,11 @@ class Marcas extends CI_Controller {
     // TODO
     public function delete(int $marcaId = NULL) {
 
-        echo '<pre>';
-        print_r($this->core_model->getById('marcas',['marca_id' => $marcaId]));
-        print_r($marcaId);
-        echo '<pre>';
-        /*  if(!$marcaId || !$this->core_model->getById('marcas',['marca_id' => $marcaId])) {
+        // echo '<pre>';
+        // print_r($this->core_model->getById('marcas',['marca_id' => $marcaId]));
+        // print_r($marcaId);
+        // echo '<pre>';
+         if(!$marcaId || !$this->core_model->getById('marcas',['marca_id' => $marcaId])) {
             $this->session->set_flashdata('erro', 'A marca não foi encontrada!');
             redirect('restrita/marcas');
         } 
@@ -144,6 +144,6 @@ class Marcas extends CI_Controller {
         }
 
         $this->core_model->delete('marcas',['marca_id' => $marcaId]);
-        */
+        redirect('restrita/marcas');
     }
 }

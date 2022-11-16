@@ -87,12 +87,12 @@ class Master extends CI_Controller {
 
         } else {
             if(!$categoria_pai = $this->core_model->getById('categorias_pai',['categoria_pai_id' => $categoriaId])) {
-                $this->session->set_flashdata('erro','A categoria não foi encontrada.');
+                $this->session->set_flashdata('erro','A categoria pai não foi encontrada.');
                 redirect('restrita/master');
             } else {
                 // Edição de Categoria
                 $this->form_validation->set_rules('categoria_pai_nome','Nome da Categoria','trim|required|min_length[4]|max_length[50]|callback_validaCategoriaPaiUnica');
-
+                
                 if ($this->form_validation->run()) {
                     $data = elements(
                         [
@@ -100,27 +100,38 @@ class Master extends CI_Controller {
                             'categoria_pai_ativa'
                         ], $this->input->post()
                     );
-
+                    
                     $data['categoria_pai_meta_link'] = url_amigavel($data['categoria_pai_nome']);
                     $data = html_escape($data);
-
+                    
                     $this->core_model->update('categorias_pai', $data, ['categoria_pai_id' => $categoriaId]);
-                    redirect('restrita/master');
                 }
-
+                
                 $data = [
                     'titulo' => 'Editar Categoria Pai',
                     'categoria_pai' => $categoria_pai
                 ];
-
+                
                 $this->load->view('restrita/layout/header', $data);
                 $this->load->view('restrita/master/core');
                 $this->load->view('restrita/layout/footer');
             }
         }
     }
-
-    public function delete() {
-        //TODO
+    
+    public function delete(int $categoria_pai_id = NULL) {
+        
+        if (!$categoria_pai_id || !$this->core_model->getById('categorias_pai', ['categoria_pai_id' => $categoria_pai_id])) {
+            $this->session->set_flashdata('erro','A categoria pai não foi encontrada.');
+            redirect('restrita/master');  
+        }
+        
+        if ($this->core_model->getById('categorias_pai', ['categoria_pai_id' => $categoria_pai_id, 'categoria_pai_ativa' => 1])) {
+            $this->session->set_flashdata('erro','A categoria pai não pode ser excluída pois está ativa.');
+            redirect('restrita/master');  
+        }
+        
+        $this->core_model->delete('categorias_pai',['categoria_pai_id' => $categoria_pai_id]);
+        redirect('restrita/master');  
     }
 }
