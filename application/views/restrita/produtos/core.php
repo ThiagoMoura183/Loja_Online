@@ -38,7 +38,7 @@
                             <?php endif; ?>
 
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-2">
                                     <label>Código do Produto</label>
                                     <input type="text" class="form-control" placeholder="Código do Produto" name="produto_codigo" value="<?php echo isset($produto) ? $produto->produto_codigo : set_value('produto_codigo') ?>" readonly>
                                     <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
@@ -51,11 +51,11 @@
                                     <?php echo form_error('produto_nome', '<div class="text-danger">', '</div>'); ?>
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Categoria Filha</label>
                                     <select class="form-control" name="produto_categoria_id">
 
-                                    <option value="">Escolha...</option>
+                                        <option value="">Escolha...</option>
                                         <?php foreach ($categorias as $categoria) : ?>
                                             <?php if (isset($produto)) : ?>
                                                 <option value="<?php echo $categoria->categoria_id ?>" <?php echo ($categoria->categoria_id == $produto->produto_categoria_id) ? 'selected' : '' ?>><?php echo $categoria->categoria_nome; ?></option>
@@ -66,10 +66,10 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label>Marca</label>
                                     <select class="form-control" name="produto_marca_id">
-                                    <option value="">Escolha...</option>
+                                        <option value="">Escolha...</option>
                                         <?php foreach ($marcas as $marca) : ?>
                                             <?php if (isset($produto)) : ?>
                                                 <option value="<?php echo $marca->marca_id ?>" <?php echo ($marca->marca_id == $produto->produto_marca_id) ? 'selected' : '' ?>><?php echo $marca->marca_nome; ?></option>
@@ -80,6 +80,99 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label>Valor de Venda do Produto</label>
+                                    <input type="text" class="form-control money2" placeholder="Valor do Produto" name="produto_valor" value="<?php echo isset($produto) ? $produto->produto_valor : set_value('produto_valor') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_valor', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Peso do Produto (KG)</label>
+                                    <input type="number" class="form-control" placeholder="Peso do Produto" name="produto_peso" value="<?php echo isset($produto) ? $produto->produto_peso : set_value('produto_peso') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_peso', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Altura do Produto (KG)</label>
+                                    <input type="number" class="form-control" placeholder="Altura do Produto" name="produto_altura" value="<?php echo isset($produto) ? $produto->produto_altura : set_value('produto_altura') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_altura', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Largura do Produto (KG)</label>
+                                    <input type="number" class="form-control" placeholder="Largura do Produto" name="produto_largura" value="<?php echo isset($produto) ? $produto->produto_largura : set_value('produto_largura') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_largura', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Comprimento do Produto (KG)</label>
+                                    <input type="number" class="form-control" placeholder="comprimento do Produto" name="produto_comprimento" value="<?php echo isset($produto) ? $produto->produto_comprimento : set_value('produto_comprimento') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_comprimento', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label>Quantidade em Estoque</label>
+                                    <input type="number" class="form-control" placeholder="Quantidade em Estoque do Produto" name="produto_quantidade_estoque" value="<?php echo isset($produto) ? $produto->produto_quantidade_estoque : set_value('produto_quantidade_estoque') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('produto_quantidade_estoque', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label>Ativo?</label>
+                                    <select class="form-control" name="produto_ativo">
+                                        <?php if (isset($produto)) : ?>
+                                            <option value="1" <?php echo ($produto->produto_ativo == 1) ? 'selected' : '' ?>>Sim</option>
+                                            <option value="0" <?php echo ($produto->produto_ativo == 0) ? 'selected' : '' ?>>Não</option>
+                                        <?php else : ?>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label>Em destaque?</label>
+                                    <select class="form-control" name="produto_destaque">
+                                        <?php if (isset($produto)) : ?>
+                                            <option value="1" <?php echo ($produto->produto_destaque == 1) ? 'selected' : '' ?>>Sim</option>
+                                            <option value="0" <?php echo ($produto->produto_destaque == 0) ? 'selected' : '' ?>>Não</option>
+                                        <?php else : ?>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label>Controla estoque?</label>
+                                    <select class="form-control" name="produto_controlar_estoque">
+                                        <?php if (isset($produto)) : ?>
+                                            <option value="1" <?php echo ($produto->produto_controlar_estoque == 1) ? 'selected' : '' ?>>Sim</option>
+                                            <option value="0" <?php echo ($produto->produto_controlar_estoque == 0) ? 'selected' : '' ?>>Não</option>
+                                        <?php else : ?>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                            <div class="form-group col-md-8">
+                                    <label>Descrição do Produto</label>
+                                   <textarea class="form-control" name="produto_descricao" rows="10"><?php echo isset($produto) ? $produto->produto_descricao : set_value('produto_descricao') ?></textarea>
+                                    <?php echo form_error('produto_descricao', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+
+                            </div>
+
                             <div class="form-row">
                                 <?php if (isset($produto)) : ?>
                                     <input type="hidden" name="produto_id" value="<?php echo $produto->produto_id; ?>">
