@@ -79,4 +79,51 @@ class Produtos extends CI_Controller {
             }
         }
     }
+
+    // Função própria para o upload de imagens
+    public function upload() {
+
+        $config['upload_path']          = './uploads/produtos/';
+        $config['allowed_types']        = 'jpg|png|jpeg';
+        $config['max_size']             = 2048; //Max 2mb
+        $config['max_width']            = 1000;
+        $config['max_height']           = 1000;
+        $config['max_filename']           = 200;
+        $config['encrypt_name']           = TRUE;
+        $config['file_ext_tolower']           = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('foto_produto')) {
+            $data = [
+                'upload_data' => $this->upload->data(),
+                'mensaem' => 'Imagem enviada com sucesso',
+                'foto_caminho' => $this->upload->data('file_name'),
+                'erro' => 0
+            ];
+
+            // Redimensionar imagens para exibição maior e carousel
+            // https://codeigniter.com/userguide3/libraries/image_lib.html?highlight=image
+
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = './uploads/produtos/' . $this->upload->data('file_name');
+            $config['new_image'] = './uploads/produtos/small/'. $this->upload->data('file_name'); //Diretório para imagens menores
+            $config['width']         = 300;
+            $config['height']       = 300;
+
+            // Chama a biblioteca
+            $this->load->library('image_lib', $config);
+            // Faz o resize e, se der erro, atribui os erros à chave 'erro'
+            if (!$this->image_lib->resize()) {
+                $data['erro'] = $this->image_lib->display_errors();
+            }
+        }
+        else {
+                $data = [
+                    'mensagem' => $this->upload->display_errors(),
+                    'erro' => 999,
+                ];
+        }
+        echo json_encode($data);
+    }
 }
