@@ -105,7 +105,7 @@ class Categorias extends CI_Controller {
                     $data['categoria_meta_link'] = url_amigavel($data['categoria_nome']);
                     $data = html_escape($data);
 
-                    $this->core_model->update('categorias', $data);
+                    $this->core_model->update('categorias', $data, ['categoria_id' => $categoria_filha_id]);
                     redirect('restrita/categorias');
                 }
 
@@ -121,5 +121,21 @@ class Categorias extends CI_Controller {
             $this->load->view('restrita/layout/footer');
             }
         }
+    }
+
+    public function delete(int $categoria_id = NULL) {
+
+        if (!$categoria_id || !$this->core_model->getById('categorias', ['categoria_id' => $categoria_id])) {
+            $this->session->set_flashdata('erro', 'A categoria filha não foi encontrada.');
+            redirect('restrita/categorias');
+        }
+
+        if ($this->core_model->getById('categorias', ['categoria_id' => $categoria_id, 'categoria_ativa' => 1])) {
+            $this->session->set_flashdata('erro', 'A categoria filha não pode ser excluída pois está ativa.');
+            redirect('restrita/categorias');
+        }
+
+        $this->core_model->delete('categorias', ['categoria_id' => $categoria_id]);
+        redirect('restrita/categorias');
     }
 }
