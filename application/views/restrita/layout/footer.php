@@ -28,8 +28,8 @@
 
     <!-- JQuery para perguntar se deseja de fato executar ação em algum click de button -->
     <script>
-        $('.delete').on("click", function(e) {
-            event.preventDefault;
+        $('.delete').on("click", function(event) {
+            event.preventDefault();
             var choice = confirm($(this).attr('data-confirm'));
 
             if (choice) {

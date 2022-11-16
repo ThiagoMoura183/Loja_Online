@@ -14,8 +14,13 @@
             <li class="dropdown <?php echo ($this->router->fetch_class() == 'usuarios' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
                 <a href="<?php echo base_url('restrita/usuarios'); ?>" class="nav-link"><i data-feather="users"></i><span>Usuários</span></a>
             </li>
-            <li class="dropdown <?php echo ($this->router->fetch_class() == 'usuarios' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
+
+            <li class="dropdown <?php echo ($this->router->fetch_class() == 'marcas' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
                 <a href="<?php echo base_url('restrita/marcas'); ?>" class="nav-link"><i data-feather="layers"></i><span>Marcas</span></a>
+            </li>
+
+            <li class="dropdown <?php echo ($this->router->fetch_class() == 'produtos' && $this->router->fetch_method() == 'index') ? 'active' : '' ?>">
+                <a href="<?php echo base_url('restrita/produtos'); ?>" class="nav-link"><i data-feather="shopping-bag"></i><span>Produtos</span></a>
             </li>
 
             <li class="dropdown">
