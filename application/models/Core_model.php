@@ -32,12 +32,12 @@ class Core_model extends CI_Model
     {
         if ($tabela && $this->db->table_exists($tabela) && is_array($data)) {
             // Insere na sessão o último ID inserido no banco de dados
+            $this->db->insert($tabela, $data);
+
             if ($getLastId) {
                 // O insert_id retorna o ID gerado automaticamente na última consulta
                 $this->session->set_userdata('last_id', $this->db->insert_id());
             }
-
-            $this->db->insert($tabela, $data);
 
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('sucesso', 'Dados salvos com sucesso!');
