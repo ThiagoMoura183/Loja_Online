@@ -72,7 +72,7 @@ class Produtos extends CI_Controller
         if (!$produto_id) {
             // Cadastrando...
 
-                $this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[4]|max_length[40]|callback_validaNomeProdutoUnico');
+                $this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[4]|max_length[240]|callback_validaNomeProdutoUnico');
                 $this->form_validation->set_rules('produto_categoria_id', 'Categoria do Produto', 'trim|required');
                 $this->form_validation->set_rules('produto_marca_id', 'Marca do Produto', 'trim|required');
                 $this->form_validation->set_rules('produto_valor', 'Valor de Venda do Produto', 'trim|required');
@@ -83,12 +83,16 @@ class Produtos extends CI_Controller
                 $this->form_validation->set_rules('produto_quantidade_estoque', 'Quantidade em estoque', 'trim|required|integer');
                 $this->form_validation->set_rules('produto_descricao', 'Descrição do Produto', 'trim|required|min_length[10]|max_length[5000]');
 
+                if(!$fotos_produtos = $this->input->post('fotos_produtos')) {
+                    $this->form_validation->set_rules('fotos_produtos', 'Imagens do Produto', 'required');
+                }
+
                 if ($this->form_validation->run()) {
 
-                    echo '<pre>';
-                    print_r($this->input->post());
-                    echo '<pre>';
-                    exit();
+                    // echo '<pre>';
+                    // print_r($this->input->post());
+                    // echo '<pre>';
+                    // exit();
 
                     $data =  elements([
                         'produto_nome',
@@ -112,20 +116,18 @@ class Produtos extends CI_Controller
                         // Criar o metalink do produto
                         $data['produto_meta_link'] = url_amigavel($data['produto_nome']);
 
+                        // Código do Produto Gerado
+                        $data['produto_codigo'] = $this->input->post('produto_codigo');
+
                         $data = html_escape($data);
 
-                        // echo '<pre>';
-                        // print_r($data);
-                        // echo '<pre>';
-                        // exit();
+                        // O TRUE gravará na sessão a variável last_id para recuperar o último ID inserido
+                        $this->core_model->insert('produtos', $data, TRUE);
 
-                        $this->core_model->update('produtos', $data, ['produto_id' => $produto_id]);
-
-                        //Exclui as imagens antigas do produto, para que não duplique na exibição da view.
-                        $this->core_model->delete('produtos_fotos',['foto_produto_id' => $produto_id]);
+                        $produto_id = $this->session->userdata('last_id');
 
                         // Recuperar do post se veio imagens  do produto...
-                        if( $fotos_produtos = $this->input->post('fotos_produtos')) {
+                        if($fotos_produtos) {
                             $total_fotos = count($fotos_produtos);
                             for($i=0; $i < $total_fotos; $i++) {
                                 $data = [
@@ -169,7 +171,7 @@ class Produtos extends CI_Controller
             } else {
                 // Editando...
 
-                $this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[4]|max_length[40]|callback_validaNomeProdutoUnico');
+                $this->form_validation->set_rules('produto_nome', 'Nome do Produto', 'trim|required|min_length[4]|max_length[240]|callback_validaNomeProdutoUnico');
                 $this->form_validation->set_rules('produto_categoria_id', 'Categoria do Produto', 'trim|required');
                 $this->form_validation->set_rules('produto_marca_id', 'Marca do Produto', 'trim|required');
                 $this->form_validation->set_rules('produto_valor', 'Valor de Venda do Produto', 'trim|required');
