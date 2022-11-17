@@ -40,7 +40,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-2">
                                     <label>Código do Produto</label>
-                                    <input type="text" class="form-control border-0" placeholder="Código do Produto" name="produto_codigo" value="<?php echo isset($produto) ? $produto->produto_codigo : set_value('produto_codigo') ?>" readonly>
+                                    <input type="text" class="form-control border-0" placeholder="Código do Produto" name="produto_codigo" value="<?php echo isset($produto) ? $produto->produto_codigo : $codigoGerado ?>" readonly>
                                     <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
                                     <?php echo form_error('produto_codigo', '<div class="text-danger">', '</div>'); ?>
                                 </div>
