@@ -1,1 +1,1 @@
-const BASE_URL = "http://localhost/restrita/";
+const BASE_URL = "http://localhost/";

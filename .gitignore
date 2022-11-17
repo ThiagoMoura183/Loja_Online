@@ -17,6 +17,11 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
+# Criado ignore para não subir arquivos de imagem do UPLOAD (controller Produtos)
+*.png
+*.jpeg
+*.jpg
+
 # IDE Files
 #-------------------------
 /nbproject/

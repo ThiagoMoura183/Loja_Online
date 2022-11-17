@@ -64,6 +64,7 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
+                                    <?php echo form_error('produto_categoria_id', '<div class="text-danger">', '</div>'); ?>
                                 </div>
 
                                 <div class="form-group col-md-2">
@@ -78,6 +79,7 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
+                                    <?php echo form_error('produto_marca_id', '<div class="text-danger">', '</div>'); ?>
                                 </div>
                             </div>
 
@@ -165,12 +167,52 @@
 
                             <div class="form-row">
 
-                            <div class="form-group col-md-8">
+                                <div class="form-group col-md-8">
                                     <label>Descrição do Produto</label>
-                                   <textarea class="form-control" style="min-height: 100px;" name="produto_descricao" rows="10"><?php echo isset($produto) ? $produto->produto_descricao : set_value('produto_descricao') ?></textarea>
+                                    <textarea class="form-control" style="min-height: 100px;" name="produto_descricao" rows="10"><?php echo isset($produto) ? $produto->produto_descricao : set_value('produto_descricao') ?></textarea>
                                     <?php echo form_error('produto_descricao', '<div class="text-danger">', '</div>'); ?>
                                 </div>
 
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-8">
+                                    <label>Imagens do Produto</label>
+                                    <div id="fileuploader">
+
+                                    </div>
+
+                                    <div id="erro_uploaded" class="text-danger">
+
+                                    </div>
+
+                                    <?php echo form_error('fotos_produtos', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <?php if (isset($produto)) : ?>
+                                        <div class="text-danger" id="uploaded_image">
+                                            <?php foreach ($fotos_produto as $foto) : ?>
+                                                <ul style="list-style: none; display: inline-block">
+                                                    <li>
+                                                        <img src="<?php echo base_url('uploads/produtos/' . $foto->foto_caminho); ?>" width="80" class="img-thumbnail mr-1 mb-2" alt="">
+                                                        <input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_caminho ?>">
+                                                        <a href="javascript:(void)" class="btn bg-danger d-block btn-icon mx-auto mb-30 btn-remove"><i class="fas fa-times"></i></a>
+                                                    </li>
+                                                </ul>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="text-danger" id="uploaded_image">
+
+                                        </div>
+
+                                    <?php endif; ?>
+                                </div>
                             </div>
 
                             <div class="form-row">
