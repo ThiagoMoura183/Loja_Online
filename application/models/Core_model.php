@@ -74,4 +74,17 @@ class Core_model extends CI_Model
             return false;
         }     
     }
+
+    // Função para gerar o código do item automaticamente
+    public function generateUniqueCode($tabela = NULL, $tipoCodigo = NULL, $tamanhoCodigo = NULL, $campoProcura = NULL) {
+
+        do {
+            $codigo = random_string($tipoCodigo, $tamanhoCodigo);
+            $this->db->where($campoProcura, $codigo);
+            $this->db->from($tabela);
+        } while($this->db->count_all_results() >= 1);
+
+        return $codigo;
+    }
+
 }
