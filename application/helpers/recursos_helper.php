@@ -3,6 +3,39 @@
 defined('BASEPATH') or exit('Ação não permitida');
 
 
+// Enviando informações do sistema para o header e o footer
+function info_header_footer() {
+    // Precisamos recuperar a instância do CodeIgniter
+    $CI = & get_instance();
+    // O $CI é como o $THIS usado na controller.
+    $sistema = $CI->core_model->getById('sistema',['sistema_id' => 1]);
+
+    return $sistema;
+}
+
+// Enviando informações das marcas para navbar
+function getMarcas() {
+    // Precisamos recuperar a instância do CodeIgniter
+    $CI = & get_instance();
+    // O $CI é como o $THIS usado na controller.
+    $marcas = $CI->loja_model->getMarcas();
+    return $marcas;
+}
+function getCategoriasPaiNavbar() {
+    // Precisamos recuperar a instância do CodeIgniter
+    $CI = & get_instance();
+    // O $CI é como o $THIS usado na controller.
+    $categoriasPai = $CI->loja_model->getCategoriasPai();
+    return $categoriasPai;
+}
+function getCategoriasFilhaNavbar($categoria_pai_id = NULL) {
+    // Precisamos recuperar a instância do CodeIgniter
+    $CI = & get_instance();
+    // O $CI é como o $THIS usado na controller.
+    $categoriasFilha = $CI->loja_model->getCategoriasFilha($categoria_pai_id);
+    return $categoriasFilha;
+}
+
 function url_amigavel($string = NULL) {
     $string = remove_acentos($string);
     return url_title($string, '-', TRUE);

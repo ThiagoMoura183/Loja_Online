@@ -1,3 +1,7 @@
+<?php $sistema = info_header_footer(); ?>
+<?php $marcas = getMarcas(); ?>
+<?php $categoriasPai = getCategoriasPaiNavbar(); ?>
+
 <!-- Begin Header Area -->
 <header>
     <!-- Begin Header Top Area -->
@@ -5,26 +9,27 @@
         <div class="container">
             <div class="row">
                 <!-- Begin Header Top Left Area -->
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-4 col-md-4">
                     <div class="header-top-left">
                         <ul class="phone-wrap">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                            <li><span>Nossos telefones:</span> <?php echo $sistema->sistema_telefone_fixo . ' - ' . $sistema->sistema_telefone_movel ?></li>
                         </ul>
                     </div>
                 </div>
                 <!-- Header Top Left Area End Here -->
                 <!-- Begin Header Top Right Area -->
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-8 col-md-8">
                     <div class="header-top-right">
                         <ul class="ht-menu">
                             <!-- Begin Setting Area -->
                             <li>
-                                <div class="ht-setting-trigger"><span>Setting</span></div>
+                                <div class="ht-setting-trigger"><span>Marcas</span></div>
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
+                                        <?php foreach ($marcas as $marca) : ?>
+                                            <li><a href="#"><?php echo $marca->marca_nome ?></a></li>
+                                        <?php endforeach; ?>
                                         <li><a href="login-register.html">My Account</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="login-register.html">Sign In</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -41,18 +46,6 @@
                                 </div>
                             </li>
                             <!-- Currency Area End Here -->
-                            <!-- Begin Language Area -->
-                            <li>
-                                <span class="language-selector-wrapper">Language :</span>
-                                <div class="ht-language-trigger"><span>English</span></div>
-                                <div class="language ht-language">
-                                    <ul class="ht-setting-list">
-                                        <li class="active"><a href="#"><img src="images/menu/flag-icon/1.jpg" alt="">English</a></li>
-                                        <li><a href="#"><img src="images/menu/flag-icon/2.jpg" alt="">Français</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Language Area End Here -->
                         </ul>
                     </div>
                 </div>
@@ -231,14 +224,21 @@
                     <div class="hb-menu">
                         <nav>
                             <ul>
-                                <li class="dropdown-holder"><a href="index.html">Home</a>
-                                    <ul class="hb-dropdown">
-                                        <li class="active"><a href="index.html">Home One</a></li>
-                                        <li><a href="index-2.html">Home Two</a></li>
-                                        <li><a href="index-3.html">Home Three</a></li>
-                                        <li><a href="index-4.html">Home Four</a></li>
-                                    </ul>
+                                <li class="dropdown-holder"><a href="<?php echo base_url('/') ?>">Home</a>
+
                                 </li>
+                                <?php foreach ($categoriasPai as $catPai) : ?>
+                                    <?php $categoriasFilha = getCategoriasFilhaNavbar($catPai->categoria_pai_id); ?>
+
+                                    <li class="dropdown-holder mx-1"><a href="#"><?php echo $catPai->categoria_pai_nome ?></a>
+                                        <ul class="hb-dropdown">
+                                            <?php foreach ($categoriasFilha as $catFilha) : ?>
+                                                <li class="active"><a href="#"><?php echo $catFilha->categoria_nome ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+
+                                <?php endforeach; ?>
                                 <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                     <ul class="megamenu hb-megamenu">
                                         <li><a href="shop-left-sidebar.html">Shop Page Layout</a>
@@ -305,51 +305,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="megamenu-static-holder"><a href="index.html">Pages</a>
-                                    <ul class="megamenu hb-megamenu">
-                                        <li><a href="blog-left-sidebar.html">Blog Layouts</a>
-                                            <ul>
-                                                <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                                <li><a href="blog-list.html">Blog List</a></li>
-                                                <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog-details-left-sidebar.html">Blog Details Pages</a>
-                                            <ul>
-                                                <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index.html">Other Pages</a>
-                                            <ul>
-                                                <li><a href="login-register.html">My Account</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="compare.html">Compare</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="index.html">Other Pages 2</a>
-                                            <ul>
-                                                <li><a href="contact.html">Contact</a></li>
-                                                <li><a href="about-us.html">About Us</a></li>
-                                                <li><a href="faq.html">FAQ</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
-                                <li><a href="shop-left-sidebar.html">Accessories</a></li>
+
                             </ul>
                         </nav>
                     </div>
