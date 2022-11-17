@@ -66,8 +66,7 @@ class Produtos extends CI_Controller
         }
     }
 
-    public function core(int $produto_id = NULL)
-    {
+    public function core(int $produto_id = NULL) {
 
         if (!$produto_id) {
             // Cadastrando...
@@ -260,8 +259,7 @@ class Produtos extends CI_Controller
     }
 
     // Função própria para o upload de imagens
-    public function upload()
-    {
+    public function upload() {
 
         $config['upload_path']          = './uploads/produtos/';
         $config['allowed_types']        = 'jpg|png|jpeg';
@@ -306,5 +304,37 @@ class Produtos extends CI_Controller
             ];
         }
         echo json_encode($data);
+    }
+
+    public function delete (int $produto_id) {
+        if (!$produto_id || !$this->core_model->getById('produtos', ['produto_id' => $produto_id])) {
+            $this->session->set_flashdata('erro', 'Esse produto não foi encontrado');
+            redirect('restrita/produtos');
+        } 
+
+        if ($this->core_model->getById('produtos', ['produto_id' => $produto_id, 'produto_ativo' => 1])) {
+            $this->session->set_flashdata('erro', 'O produto não pode ser excluído pois está ativo.');
+            redirect('restrita/produtos');
+        }
+
+        // Recuperando todas as fotos do produto antes da remoção!
+        $fotos_produto = $this->core_model->getAll('produtos_fotos', ['foto_produto_id' => $produto_id]);
+
+        $this->core_model->delete('produtos', ['produto_id' => $produto_id]);
+
+        // Eliminar as fotos do produto
+        if ($fotos_produto) {
+            foreach($fotos_produto as $foto) {
+                $foto_grande = FCPATH . 'uploads/produtos/' . $foto->foto_caminho;
+                $foto_pequena = FCPATH . 'uploads/produtos/small/' . $foto->foto_caminho;
+
+                // Excluir as imagens
+                if (file_exists($foto_grande) && file_exists($foto_pequena)) {
+                    unlink($foto_grande);
+                    unlink($foto_pequena);
+                }
+            }
+        }
+        redirect('restrita/produtos');     
     }
 }
