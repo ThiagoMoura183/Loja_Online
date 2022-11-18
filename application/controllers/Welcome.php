@@ -9,7 +9,9 @@ class Welcome extends CI_Controller {
 
 		$data = [
 			'titulo' => $sistema->sistema_nome_fantasia,
+			'produtosDestaques' => $this->loja_model->getProdutosDestaques($sistema->sistema_produtos_destaques)
 		];
+
 		$this->load->view('web/layout/header', $data);
 		$this->load->view('web/loja');
 		$this->load->view('web/layout/footer');
