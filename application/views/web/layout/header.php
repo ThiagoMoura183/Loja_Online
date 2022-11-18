@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="<?php echo base_url('public/web/css/responsive.css') ?>">
     <!-- Modernizr js -->
     <script src="<?php echo base_url('public/web/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
+
 </head>
 
 <body>

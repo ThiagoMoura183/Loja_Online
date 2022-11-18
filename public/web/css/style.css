@@ -1778,8 +1778,16 @@ textarea:focus {
 	transition: all 0.3s ease-in-out;
 	color: #242424;
 }
+
+.hb-menu nav > ul > li:first-child > a::after {
+	content: "";
+} 
+
+.hb-menu nav > ul > li:last-child > a::after {
+	content: "\f107";
+}
 .hb-menu nav > ul > li:nth-child(n+5) > a::after {
-	content: none;
+	content: "\f107";
 }
 .hb-menu nav > ul > li:hover  a::after {
 	transform: rotate(180deg);
@@ -5434,6 +5442,8 @@ span.required {
 .small-version {
   display: none;
 }
+
+
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
