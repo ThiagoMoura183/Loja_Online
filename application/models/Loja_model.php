@@ -56,6 +56,7 @@ class Loja_model extends CI_Model {
         
         $this->db->limit($numProdutosDestaques);
         $this->db->group_by('produtos.produto_id');
+        $this->db->order_by('produtos.produto_id', 'RANDOM');
 
 
         return $this->db->get('produtos')->result();
