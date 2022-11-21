@@ -14,7 +14,7 @@ class Produto extends CI_Controller {
         } else {
 
             $data = [
-                'titulo' => 'Visualizar Produto',
+                'titulo' => "{$produto->produto_nome}",
                 'scripts' => [
                     'mask/jquery.mask.min.js',
                     'mask/custom.js',
