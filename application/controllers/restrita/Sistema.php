@@ -29,6 +29,8 @@ class Sistema extends CI_Controller {
         $this->form_validation->set_rules('sistema_site_url', 'URL do site', 'trim|required|valid_url|max_length[100]');
         $this->form_validation->set_rules('sistema_email', 'Email de contato','trim|required|valid_email|max_length[100]');
         $this->form_validation->set_rules('sistema_produtos_destaques', 'Quantidade produtos destaque', 'trim|required|integer');
+        $this->form_validation->set_rules('sistema_facebook_url', 'URL do Facebook', 'trim');
+        $this->form_validation->set_rules('sistema_instagram_url', 'URL do Instagram', 'trim');
 
         if ($this->form_validation->run()) {
            
@@ -47,7 +49,9 @@ class Sistema extends CI_Controller {
                     'sistema_numero',
                     'sistema_cidade',
                     'sistema_estado',
-                    'sistema_produtos_destaques'           
+                    'sistema_produtos_destaques',         
+                    'sistema_facebook_url',         
+                    'sistema_instagram_url',         
                 ], $this->input->post()    
                 );
 
