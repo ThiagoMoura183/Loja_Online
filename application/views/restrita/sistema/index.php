@@ -139,6 +139,18 @@
                                     <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
                                     <?php echo form_error('sistema_produtos_destaques', '<div class="text-danger">', '</div>'); ?>
                                 </div>
+                                <div class="form-group col-md-3">
+                                    <label>URL Facebook</label>
+                                    <input type="text" class="form-control" placeholder="Coloque a URL do Facebook (Pós barra)" name="sistema_facebook_url" value="<?php echo isset($sistema) ? $sistema->sistema_facebook_url : set_value('sistema_facebook_url') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('sistema_facebook_url', '<div class="text-danger">', '</div>'); ?>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>URL Instagram</label>
+                                    <input type="text" class="form-control" placeholder="Coloque a URL do Instagram (Pós barra)" name="sistema_instagram_url" value="<?php echo isset($sistema) ? $sistema->sistema_instagram_url : set_value('sistema_instagram_url') ?>">
+                                    <!-- O trecho abaixo é na ordem: o campo que deu erro de validação, abertura do elemento que irá utilizar e por fim o fechamento do elemento.  -->
+                                    <?php echo form_error('sistema_instagram_url', '<div class="text-danger">', '</div>'); ?>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">
