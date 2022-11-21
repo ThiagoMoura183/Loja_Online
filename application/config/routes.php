@@ -56,3 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Quando escrever o base url RESTRITA, ele irá ROTEAR para o caminho abaixo.
 $route['restrita'] = 'restrita/home/index';
+
+// Criada rota para quando acessar a PÁGINA DO PRODUTO destaque, ser direcionado como parâmetro
+// https://codeigniter.com/userguide3/general/routing.html
+$route['produto/(:any)'] = 'produto/index/$1';
