@@ -108,7 +108,7 @@
                                         <div class="reassurance-icon">
                                             <i class="fa fa-truck"></i>
                                         </div>
-                                        <p>Produzido e entregue por: <?php echo $sistema->sistema_nome_fantasia ?></p>
+                                        <p>Produzido(a) e entregue por: <?php echo $sistema->sistema_nome_fantasia ?></p>
                                     </div>
                                 </li>
                                 <li>
