@@ -68,3 +68,5 @@ $route['categoria/(:any)'] = 'categoria/index/$1';
 
 // Criada rota para acessar as grandes marcas
 $route['marca/(:any)'] = 'marca/index/$1';
+
+$route['busca'] = 'busca/index/';

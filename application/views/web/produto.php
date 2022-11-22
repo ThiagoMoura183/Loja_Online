@@ -60,7 +60,7 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="product-variants">
+                        <!-- <div class="product-variants">
                             <div class="produt-variants-size">
                                 <label>Dimensão do Produto</label>
                                 <select class="nice-select">
@@ -69,7 +69,7 @@
                                     <option value="3" title="L">80x120cm</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="single-add-to-cart">
                             <form action="#" class="cart-quantity">
                                 <div class="quantity">

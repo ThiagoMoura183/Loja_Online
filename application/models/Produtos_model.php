@@ -77,4 +77,36 @@ class Produtos_model extends CI_Model {
 
         return $this->db->get('produtos')->result();
     }
+
+    // Retorna os produtos de acordo com a busca da navbar
+    public function getAllBySearch($busca = NULL) {
+
+        if ($busca) {
+
+            $this->db->select([
+                'produtos.produto_nome',
+                'produtos.produto_valor',
+                'produtos.produto_meta_link',
+                'categorias_pai.categoria_pai_nome',
+                'categorias.categoria_nome',
+                'produtos_fotos.foto_caminho'
+            ]);
+
+            $this->db->where('produtos.produto_ativo', 1);
+
+            $this->db->like('produtos.produto_nome', $busca, 'BOTH');
+
+            $this->db->join('categorias', 'categorias.categoria_id = produtos.produto_categoria_id', 'LEFT');
+            $this->db->join('marcas', 'marcas.marca_id = produtos.produto_marca_id', 'LEFT');
+            $this->db->join('categorias_pai', 'categorias_pai.categoria_pai_id = categorias.categoria_pai_id', 'LEFT');
+            $this->db->join('produtos_fotos', 'produtos_fotos.foto_produto_id = produtos.produto_id', 'LEFT');
+    
+            // Retorna apenas uma foto por registro
+            $this->db->group_by('produtos.produto_id');
+            return $this->db->get('produtos')->result();
+
+        } else {
+            return false;
+        }
+    }
 }
