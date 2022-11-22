@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') or exit('Ação não permitida!');
 
 class Categoria extends CI_Controller {
 

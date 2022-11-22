@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') or exit('Ação não permitida!');
 
 class Produto extends CI_Controller {
 
