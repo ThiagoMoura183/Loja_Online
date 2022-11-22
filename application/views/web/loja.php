@@ -102,7 +102,7 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Avaliações</a>
+                                                Avaliações
                                             </h5>
                                             <div class="rating-box">
                                                 <ul class="rating">
