@@ -65,3 +65,6 @@ $route['produto/(:any)'] = 'produto/index/$1';
 // Criada rota para quando acessar a PÁGINA DA CATEGORIA PAI e FILHA, ser direcionado como parâmetro
 $route['master/(:any)'] = 'master/index/$1';
 $route['categoria/(:any)'] = 'categoria/index/$1';
+
+// Criada rota para acessar as grandes marcas
+$route['marca/(:any)'] = 'marca/index/$1';

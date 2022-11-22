@@ -27,7 +27,7 @@
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
                                         <?php foreach ($marcas as $marca) : ?>
-                                            <li><a href="#"><?php echo $marca->marca_nome ?></a></li>
+                                            <li><a href="<?php echo base_url('marca/' . $marca->marca_meta_link) ?>"><?php echo $marca->marca_nome ?></a></li>
                                         <?php endforeach; ?>
                                         <li><a href="login-register.html">My Account</a></li>
                                     </ul>
