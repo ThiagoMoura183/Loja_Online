@@ -60,3 +60,8 @@ $route['restrita'] = 'restrita/home/index';
 // Criada rota para quando acessar a PÁGINA DO PRODUTO destaque, ser direcionado como parâmetro
 // https://codeigniter.com/userguide3/general/routing.html
 $route['produto/(:any)'] = 'produto/index/$1';
+
+
+// Criada rota para quando acessar a PÁGINA DA CATEGORIA PAI e FILHA, ser direcionado como parâmetro
+$route['master/(:any)'] = 'master/index/$1';
+$route['categoria/(:any)'] = 'categoria/index/$1';
