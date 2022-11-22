@@ -15,6 +15,7 @@ class Master extends CI_Controller {
 
             $data = [
                 'titulo' => 'Produtos da categoria ' . $master->categoria_pai_nome,
+                'categoria' => $master->categoria_pai_nome,
                 'produtos' => $this->produtos_model->getAllBy(['categoria_pai_meta_link' => $categoria_pai_meta_link])
             ];
 
