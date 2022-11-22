@@ -50,7 +50,7 @@
                         <p class="mt-10"><span class="product-details-ref">Marca: <a href="<?php echo base_url('marca/' . $produto->marca_meta_link); ?>"><?php echo $produto->marca_nome ?></a></span></p>
 
                         <p class="mt-10"><span class="product-details-ref">Qtd. Disponível em Estoque: <?php echo ($produto->produto_quantidade_estoque > 0) ? '<span class="badge badge-success" style="font-size:14px; padding: 10px;">' . $produto->produto_quantidade_estoque . '</span>' : '<span class="badge badge-danger" style="font-size:14px; padding: 10px;">Indisponível</span>' ?></span></p>
-                        
+
                         <div class="price-box pt-20">
                             <span class="new-price new-price-2"><?php echo 'R$&nbsp' . number_format($produto->produto_valor, 2) ?></span>
                         </div>
@@ -70,18 +70,22 @@
                                 </select>
                             </div>
                         </div> -->
+
+
                         <div class="single-add-to-cart">
-                            <form action="#" class="cart-quantity">
+                            <?php
+                            $atributos = ['class' => 'cart-quantity']; ?>
+                           <?php echo form_open('carrinho', $atributos);?>
                                 <div class="quantity">
                                     <label>Quantidade</label>
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                        <input class="cart-plus-minus-box mask-produto-qty" name="produto_quantidade" value="1" type="text">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" type="submit">Adicionar ao Carrinho</button>
-                            </form>
+                                <button class="add-to-cart btn-add-produto" data-id="<?php echo $produto->produto_id ?>" type="button">Adicionar ao Carrinho</button>
+                            <?php echo form_close(); ?>
                         </div>
                         <div class="product-additional-info pt-25">
                             <!-- <div class="product-social-sharing pt-25">
