@@ -66,4 +66,58 @@ class Carrinho_compras {
 
         return $retorno;
     }
+
+    // Exibe valor total dos produtos do carrinho (sessão)
+
+    public function getTotal() {
+        $carrinho = $this->getAll();
+        $valorTotalCarrinho = 0;
+
+        foreach($carrinho as $indice => $produto) {
+            $valorTotalCarrinho += $produto['subtotal'];
+        }
+
+        return number_format($valorTotalCarrinho, 2);
+    }
+
+    // Exibe o número total de quantidade no carrinho
+
+    public function getTotalItens() {
+      return  $totalItens = count($this->getAll());
+    }
+
+    // Recuperar as dimensões dos produtos do carrinho
+    public function getAllDimensoes() {
+        $CI = & get_instance();
+        $CI->load->model('carrinho_model'); 
+
+        $retorno = [];
+        $indice = 0;
+
+        foreach($_SESSION['carrinho'] as $produto_id => $produtoQtd) {
+            $query = $CI->carrinho_model->getById($produto_id);
+            $retorno[$indice]['produto_nome'] = $query->produto_nome;
+            $retorno[$indice]['produto_peso'] = $query->produto_peso;
+            $retorno[$indice]['produto_altura'] = $query->produto_altura;
+            $retorno[$indice]['produto_largura'] = $query->produto_largura;
+            $retorno[$indice]['produto_comprimento'] = $query->produto_comprimento;
+            $retorno[$indice]['produto_dimensao'] = $query->produto_altura + $query->produto_largura + $query->produto_comprimento;
+
+            $indice++;    
+        }
+
+        return $retorno;
+    }
+
+    // Retorna o total de pesos dos produtos do carrinho
+    public function getTotalPeso() {
+        $carrinho = $this->getAll();
+        $totalPesos = 0;
+
+        foreach($carrinho as $indice => $produto) {
+            $totalPesos += $produto['produto_peso'] * $produto['produto_quantidade'];
+        }
+
+        return $totalPesos;
+    }
 }
