@@ -230,10 +230,10 @@
                                 <?php foreach ($categoriasPai as $catPai) : ?>
                                     <?php $categoriasFilha = getCategoriasFilhaNavbar($catPai->categoria_pai_id); ?>
 
-                                    <li class="dropdown-holder mx-1"><a href="#"><?php echo $catPai->categoria_pai_nome ?></a>
+                                    <li class="dropdown-holder mx-1"><a href="<?php echo base_url('master/' . $catPai->categoria_pai_meta_link) ?>"><?php echo $catPai->categoria_pai_nome ?></a>
                                         <ul class="hb-dropdown">
                                             <?php foreach ($categoriasFilha as $catFilha) : ?>
-                                                <li class="active"><a href="#"><?php echo $catFilha->categoria_nome ?></a></li>
+                                                <li class="active"><a href="<?php echo base_url('master/' . $catFilha->categoria_meta_link) ?>"><?php echo $catFilha->categoria_nome ?></a></li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </li>
