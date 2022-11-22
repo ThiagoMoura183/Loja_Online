@@ -57,6 +57,7 @@ class Produtos_model extends CI_Model {
             'produtos.produto_valor',
             'produtos.produto_meta_link',
             'categorias_pai.categoria_pai_nome',
+            'categorias_pai.categoria_pai_meta_link',
             'categorias.categoria_nome',
             'produtos_fotos.foto_caminho'
         ]);

@@ -19,6 +19,11 @@ class Categoria extends CI_Controller {
                 'produtos' => $this->produtos_model->getAllBy(['categoria_meta_link' => $categoria_meta_link])
             ];
 
+            foreach($data['produtos'] as $produto) {
+                $data['categoria_pai_nome'] = $produto->categoria_pai_nome;
+                $data['categoria_pai_meta_link'] = $produto->categoria_pai_meta_link;
+            }
+
             // echo '<pre>';
             // print_r($data);
             // exit();
