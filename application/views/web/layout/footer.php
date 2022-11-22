@@ -329,6 +329,12 @@
 <script src="<?php echo base_url('public/web/js/scrollUp.min.js') ?>"></script>
 <!-- Main/Activator js -->
 <script src="<?php echo base_url('public/web/js/main.js') ?>"></script>
+
+<?php if (isset($scripts)) : ?>
+        <?php foreach ($scripts as $script) : ?>
+            <script src="<?PHP echo base_url("public/assets/{$script}"); ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 
 </html>
